@@ -13,7 +13,7 @@ JobFlow is a modern web application designed to streamline your job hunting proc
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 with App Router
+- **Framework:** Next.js 15 with App Router
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS, shadcn/ui
 - **Database:** Supabase
