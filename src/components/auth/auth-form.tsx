@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 export function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -75,9 +76,13 @@ export function AuthForm() {
   return (
     <Card className="w-[400px] shadow-lg">
       <CardHeader className="space-y-1">
-        <h2 className="text-2xl font-bold text-center">Welcome to JobFlow</h2>
+        <h2 className="text-2xl font-bold text-center">
+          {mode === "signin" ? "Welcome back" : "Create an account"}
+        </h2>
         <p className="text-sm text-muted-foreground text-center">
-          Enter your credentials to continue
+          {mode === "signin"
+            ? "Enter your credentials to continue"
+            : "Enter your details to get started"}
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -110,31 +115,46 @@ export function AuthForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col space-y-4 mt-4">
-        <Button
-          className="w-full h-11"
-          onClick={handleSignIn}
-          disabled={loading}
-        >
-          {loading ? "Loading..." : "Sign In"}
-        </Button>
-        <div className="relative w-full">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
-          </div>
-        </div>
-        <Button
-          variant="outline"
-          className="w-full h-11"
-          onClick={handleSignUp}
-          disabled={loading}
-        >
-          Create Account
-        </Button>
+        {mode === "signin" ? (
+          <>
+            <Button
+              className="w-full h-11"
+              onClick={handleSignIn}
+              disabled={loading}
+            >
+              {loading ? "Loading..." : "Sign In"}
+            </Button>
+            <p className="text-center text-sm text-muted-foreground">
+              Don't have an account?{" "}
+              <button
+                onClick={() => setMode("signup")}
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                Create an account
+              </button>
+            </p>
+          </>
+        ) : (
+          <>
+            <Button
+              variant="outline"
+              className="w-full h-11"
+              onClick={handleSignUp}
+              disabled={loading}
+            >
+              Create Account
+            </Button>
+            <p className="text-center text-sm text-muted-foreground">
+              Already have an account?{" "}
+              <button
+                onClick={() => setMode("signin")}
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                Sign in
+              </button>
+            </p>
+          </>
+        )}
       </CardFooter>
     </Card>
   );
