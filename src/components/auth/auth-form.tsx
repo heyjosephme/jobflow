@@ -64,7 +64,7 @@ export function AuthForm() {
         throw signInError;
       }
 
-      router.push("/dashboard");
+      router.push("/onboarding");
       router.refresh();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to sign in");
