@@ -19,6 +19,7 @@ model User {
   name         String?
   applications Application[]
   notes        Note[]
+  profile      UserProfile?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
@@ -79,6 +80,48 @@ model Note {
   updatedAt     DateTime     @updatedAt
 }
 
+model UserProfile {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  // Professional Info
+  jobRole           String?
+  industry          String?
+  yearsOfExperience Int?
+  positionLevel     PositionLevel?
+  currentSalary     Decimal?       @db.Decimal(12, 2)
+
+  // Goals & Objectives
+  careerGoals        String[]
+  learningObjectives String[]
+
+  // Additional Info
+  companySize            CompanySize?
+  location               String?
+  preferredLearningStyle LearningStyle?
+  timeAvailability       Int? // Hours per week
+  primaryLanguage        String?
+
+  // Skills (Consider if you want to normalize this later)
+  skills Skill[]
+
+  // Metadata
+  onboardingCompleted Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model Skill {
+  id               String           @id @default(cuid())
+  name             String
+  proficiencyLevel ProficiencyLevel
+  userProfile      UserProfile      @relation(fields: [userProfileId], references: [id])
+  userProfileId    String
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
 enum ApplicationStatus {
   SAVED
   APPLIED
@@ -112,4 +155,33 @@ enum InterviewStatus {
   COMPLETED
   CANCELLED
   RESCHEDULED
+}
+
+enum PositionLevel {
+  ENTRY
+  MID
+  SENIOR
+  EXECUTIVE
+}
+
+enum CompanySize {
+  TINY // 1-10
+  SMALL // 11-50
+  MEDIUM // 51-200
+  LARGE // 201-500
+  ENTERPRISE // 500+
+}
+
+enum LearningStyle {
+  VISUAL
+  READING
+  INTERACTIVE
+  HANDS_ON
+}
+
+enum ProficiencyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
 }

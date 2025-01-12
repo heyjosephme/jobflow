@@ -1,5 +1,4 @@
-// app/api/onboarding/route.ts
-import { NextResponse } from 'next/server'
+/* import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function POST(request: NextRequest) {
@@ -29,4 +28,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-}
+} */

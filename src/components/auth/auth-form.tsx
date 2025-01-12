@@ -41,7 +41,7 @@ export function AuthForm() {
       }
 
       if (data.user) {
-        router.push("/onboarding"); // For first time users
+        router.push("/applications"); // For first time users
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to sign up");
@@ -64,7 +64,7 @@ export function AuthForm() {
         throw signInError;
       }
 
-      router.push("/onboarding");
+      router.push("/applications");
       router.refresh();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to sign in");
@@ -125,7 +125,7 @@ export function AuthForm() {
               {loading ? "Loading..." : "Sign In"}
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <button
                 onClick={() => setMode("signup")}
                 className="text-primary underline-offset-4 hover:underline"

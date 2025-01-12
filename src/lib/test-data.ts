@@ -4,7 +4,7 @@ import { ApplicationStatus, JobType } from "@prisma/client";
 // Import the type we created earlier
 import type { ApplicationWithRelations } from "@/lib/types";
 
-function generateRealisticDates() {
+export function generateRealisticDates() {
   const appliedDate = faker.date.recent({ days: 30 });
   const createdAt = new Date(appliedDate);
   const updatedAt = faker.date.between({

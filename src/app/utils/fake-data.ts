@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-function generateFakeApplications(count = 10) {
+export function generateFakeApplications(count = 10) {
   return Array.from({ length: count }, () => ({
     id: faker.string.uuid(),
     company: faker.company.name(),
