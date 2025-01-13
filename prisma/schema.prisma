@@ -27,8 +27,8 @@ model User {
 model Application {
   id          String            @id @default(cuid())
   jobTitle    String
-  company     Company           @relation(fields: [companyId], references: [id])
-  companyId   String
+  company     Company?          @relation(fields: [companyId], references: [id])
+  companyId   String?
   status      ApplicationStatus
   appliedDate DateTime          @default(now())
   link        String?
