@@ -3,6 +3,7 @@ import { generateFakeApplications } from "@/lib/test-data";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import EmptyStateWidget from "@/components/EmptyStateWidget";
 
 export default async function ApplicationsPage() {
   // Initially use faker data
@@ -24,6 +25,7 @@ export default async function ApplicationsPage() {
         </p>
       </header>
       {/*  <ApplicationList applications={applications} /> */}
+      <EmptyStateWidget />
     </div>
   );
 }
